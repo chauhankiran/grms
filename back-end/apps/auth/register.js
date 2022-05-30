@@ -1,3 +1,5 @@
+import connection from "../../database/connection.js";
+
 const register = async (req, res, next) => {
   // register requires at least first name, last name, email, and password.
   // For the purpose of validation on back-end side, we will also fetch the confirmPassword.
@@ -17,7 +19,18 @@ const register = async (req, res, next) => {
   }
 
   try {
-    // TODO: Add operation
+    // TODO: Add validation to check if given email id exists or not.
+    // TODO: Password should be saved in encryted hash.
+    const id = await connection("users").insert({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+
+    // When the new account is created, we're not going to directly support
+    // the login. We'll send a confirmation email and the login should be done.
+    return res.status(200).json({ data: id[0] });
   } catch (error) {
     next(error);
   }

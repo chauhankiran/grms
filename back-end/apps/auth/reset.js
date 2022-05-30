@@ -1,3 +1,5 @@
+import connection from "../../database/connection.js";
+
 const reset = async (req, res, next) => {
   // reset password requires email.
   const { email } = req.body;
@@ -8,7 +10,18 @@ const reset = async (req, res, next) => {
   }
 
   try {
-    // TODO: Add operation
+    const user = await connection("users")
+      .where("email", email)
+      .select("id")
+      .first();
+
+    if (user) {
+      return res.status(200).json({ data: user });
+    } else {
+      return res
+        .status(404)
+        .json({ error: "User with entered email doesn't found." });
+    }
   } catch (error) {
     next(error);
   }
