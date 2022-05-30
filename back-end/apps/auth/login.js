@@ -1,3 +1,4 @@
+import jsonwebtoken from "jsonwebtoken";
 import connection from "../../database/connection.js";
 
 const login = async (req, res, next) => {
@@ -25,7 +26,13 @@ const login = async (req, res, next) => {
       .first();
 
     if (user) {
-      return res.status(200).json({ data: user });
+      // TODO: Remove the secret from here and either put in .env file or in config.js file.
+      const token = jsonwebtoken.sign(
+        { id: user.id },
+        "uncdGsAZn3pLb7NsmcVMhYlL5mcRQY8W",
+        { expiresIn: "1d" }
+      );
+      return res.status(200).json({ data: token });
     } else {
       return res
         .status(404)
