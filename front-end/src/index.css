@@ -4,3 +4,27 @@ body {
   color: #424242;
   font-family: "Inter", sans-serif;
 }
+
+a {
+  color: #087ed1;
+  text-decoration: none;
+}
+
+label {
+  cursor: pointer;
+}
+
+.bg-primary {
+  background-color: #087ed1 !important;
+}
+
+.btn,
+.form-select,
+.form-control {
+  border-radius: 0;
+}
+
+.form-select:focus,
+.form-control:focus {
+  box-shadow: none;
+}
