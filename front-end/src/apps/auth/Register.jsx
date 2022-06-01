@@ -74,6 +74,12 @@ const Register = () => {
       .then((data) => {
         if (data.data) {
           setRegisterFormFields({ ...registerFormFields, isDisplay: false });
+        } else {
+          setRegisterFormFields({
+            ...registerFormFields,
+            error: data.error,
+          });
+          return false;
         }
       })
       .catch((error) => console.log(error));

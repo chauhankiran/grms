@@ -2,11 +2,11 @@ import bcrypt from "bcrypt";
 import connection from "../../database/connection.js";
 
 const register = async (req, res, next) => {
-  // register requires at least first name, last name, email, and password.
+  // register requires at least first name, last name, email, and password fields at this moment.
   // For the purpose of validation on back-end side, we will also fetch the confirmPassword.
   const { firstName, lastName, email, password, confirmPassword } = req.body;
 
-  // TODO: Add more validation.
+  // TODO: Add more validations here.
   if (!firstName || !lastName || !email || !password || !confirmPassword) {
     return res.status(422).json({ error: "All fields are required." });
   }
@@ -23,8 +23,17 @@ const register = async (req, res, next) => {
   const passwordHash = bcrypt.hashSync(password, 14);
 
   try {
-    // TODO: Add validation to check if given email id exists or not.
-    // TODO: Password should be saved in encryted hash.
+    // Check if the user with given email exists.
+    const user = await connection("users")
+      .where("email", email)
+      .count("id as count")
+      .first();
+    if (user.count > 0) {
+      return res
+        .status(422)
+        .json({ error: "Entered email is already exists." });
+    }
+
     const id = await connection("users").insert({
       firstName,
       lastName,

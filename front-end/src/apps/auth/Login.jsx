@@ -13,7 +13,11 @@ const Login = () => {
   });
 
   const handleChange = (e) => {
-    setLoginFormFields({ ...loginFormFields, [e.target.name]: e.target.value });
+    setLoginFormFields({
+      ...loginFormFields,
+      error: "",
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
