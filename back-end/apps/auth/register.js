@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import connection from "../../database/connection.js";
 
 const register = async (req, res, next) => {
@@ -18,6 +19,9 @@ const register = async (req, res, next) => {
     return res.status(422).json({ error: "Entered password doesn't match" });
   }
 
+  // Generate password hash.
+  const passwordHash = bcrypt.hashSync(password, 14);
+
   try {
     // TODO: Add validation to check if given email id exists or not.
     // TODO: Password should be saved in encryted hash.
@@ -25,7 +29,7 @@ const register = async (req, res, next) => {
       firstName,
       lastName,
       email,
-      password,
+      password: passwordHash,
     });
 
     // When the new account is created, we're not going to directly support

@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "node app.jss"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "better-sqlite3": "^7.5.3",
     "cors": "^2.8.5",
     "express": "^4.18.1",
