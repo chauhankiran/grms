@@ -10,7 +10,7 @@ const Nav = () => {
     pathname === "/reset"
   ) {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             GRMS
@@ -33,7 +33,7 @@ const Nav = () => {
     );
   } else {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             GRMS

@@ -13,6 +13,18 @@ a {
 label {
   cursor: pointer;
 }
+label,
+.fw-500 {
+  font-weight: 500;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
+}
+
+.navbar {
+  border-bottom: 1px solid #e5e9ef;
+}
 
 .bg-primary {
   background-color: #087ed1 !important;

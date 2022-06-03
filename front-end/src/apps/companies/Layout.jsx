@@ -6,9 +6,9 @@ const Layout = ({ children }) => {
       <Nav />
       <div className="container my-4">
         <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4">{children}</div>
-          <div className="col-md-4"></div>
+          <div className="col-md-2"></div>
+          <div className="col-md-8">{children}</div>
+          <div className="col-md-2"></div>
         </div>
       </div>
     </>
