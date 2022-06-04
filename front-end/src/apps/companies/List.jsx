@@ -1,8 +1,30 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import constants from "../../constants";
 import Layout from "./Layout";
 
 const List = () => {
   const navigate = useNavigate();
+  const [companies, setCompanies] = useState([]);
+
+  // TODO: Re-arrange this function into common one or place it inside other file.
+  const getCompanies = () => {
+    fetch(`${constants.API_ENDPOINT}/companies`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setCompanies(data.data))
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getCompanies();
+  }, []);
 
   const handleAddCompany = () => {
     navigate("/companies/add");
@@ -21,6 +43,7 @@ const List = () => {
         </div>
       </div>
 
+      {/* TODO: Add search support. */}
       <input
         type="text"
         name="search"
@@ -41,14 +64,22 @@ const List = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Microsoft, Inc.</td>
-            <td>1</td>
-            <td>2022-05-22 10:35:03</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
+          {companies.length > 0 &&
+            companies.map((company) => {
+              return (
+                <tr>
+                  {/* TODO: Id and name should be clickable and take you to the details page. */}
+                  <td>{company.id}</td>
+                  <td>{company.name}</td>
+                  {/* TODO: Display full name of the user. */}
+                  <td>{company.createdBy ? company.createdBy : "-"}</td>
+                  {/* TODO: Time should be in human readable form using moment e.g. 2 hours ago */}
+                  <td>{company.createdOn ? company.createdOn : "-"}</td>
+                  <td>{company.updatedBy ? company.updatedBy : "-"}</td>
+                  <td>{company.updatedOn ? company.updatedOn : "-"}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </Layout>

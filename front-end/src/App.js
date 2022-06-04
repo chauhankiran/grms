@@ -62,7 +62,7 @@ const App = () => {
   );
 };
 
-// TODO: Place this code inside other component.
+// TODO: Place this code inside other component/file.
 const PrivateRoute = ({ children }) => {
   // TODO: In future fetch it from store?
   const token = localStorage.getItem("token");
