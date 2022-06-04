@@ -15,6 +15,7 @@ const Add = () => {
     setCompany({ ...company, [e.target.name]: e.target.value });
   };
 
+  // TODO: Re-arrange this code to put is somewhere else or refactor into function.
   const handleSubmit = (e) => {
     e.preventDefault();
 

@@ -47,6 +47,8 @@ const list = async (req, res, next) => {
         "country",
         "createdBy",
         "createdOn",
+        "updatedBy",
+        "updatedOn",
         "active"
       )
       .offset(skip)
