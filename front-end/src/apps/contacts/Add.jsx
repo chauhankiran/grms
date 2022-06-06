@@ -8,7 +8,7 @@ const Add = () => {
   const [contact, setContact] = useState({});
 
   const handleCancel = () => {
-    navigate("/companies");
+    navigate("/contacts");
   };
 
   const handleChange = (e) => {
@@ -41,11 +41,11 @@ const Add = () => {
         <div className="row">
           <div className="col-md-12">
             <div className="mb-3">
-              <label htmlFor="name">First name</label>
+              <label htmlFor="firstName">First name</label>
               <input
                 type="text"
-                name="name"
-                id="name"
+                name="firstName"
+                id="firstName"
                 placeholder="e.g. Kai"
                 className="form-control"
                 value={contact.firstName || ""}
@@ -57,11 +57,11 @@ const Add = () => {
         <div className="row">
           <div className="col-md-12">
             <div className="mb-3">
-              <label htmlFor="name">Last name</label>
+              <label htmlFor="lastName">Last name</label>
               <input
                 type="text"
-                name="name"
-                id="name"
+                name="lastName"
+                id="lastName"
                 placeholder="e.g. Doe"
                 className="form-control"
                 value={contact.lastName || ""}

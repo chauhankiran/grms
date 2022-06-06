@@ -26,9 +26,7 @@ const list = async (req, res, next) => {
       .where("active", 1)
       .modify((query) => {
         if (search) {
-          if (search.name) {
-            query.whereLike("name", `${search.name}%`);
-          }
+          query.whereLike("name", `${search}%`);
         }
       })
       .select(

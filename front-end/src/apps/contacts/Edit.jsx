@@ -6,19 +6,19 @@ import Layout from "./Layout";
 const Edit = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [company, setCompany] = useState({});
+  const [contact, setContact] = useState({});
 
   const handleCancel = () => {
-    navigate("/companies");
+    navigate("/contacts");
   };
 
   const handleChange = (e) => {
-    setCompany({ ...company, [e.target.name]: e.target.value });
+    setContact({ ...contact, [e.target.name]: e.target.value });
   };
 
   // TODO: Re-arrange this function into common one or place it inside other file.
-  const getCompany = () => {
-    fetch(`${constants.API_ENDPOINT}/companies/${id}`, {
+  const getContact = () => {
+    fetch(`${constants.API_ENDPOINT}/contacts/${id}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -27,49 +27,65 @@ const Edit = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => setCompany(data.data))
+      .then((data) => setContact(data.data))
       .catch((error) => console.log(error));
   };
 
   // TODO: Resolve the dep. warning by useEffect hook.
   useEffect(() => {
-    getCompany();
+    getContact();
   }, []);
 
   // TODO: Re-arrange this code to put is somewhere else or refactor into function.
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`${constants.API_ENDPOINT}/companies/${id}`, {
+    fetch(`${constants.API_ENDPOINT}/contacts/${id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
-      body: JSON.stringify(company),
+      body: JSON.stringify(contact),
     })
       .then((res) => res.json())
-      .then((data) => navigate(`/companies/${data.data}`))
+      .then((data) => navigate(`/contacts/${data.data}`))
       .catch((error) => console.log(error));
   };
 
   return (
     <Layout>
-      <h1>Edit company</h1>
+      <h1>Edit contact</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-md-12">
             <div className="mb-3">
-              <label htmlFor="name">Company name</label>
+              <label htmlFor="firstName">First name</label>
               <input
                 type="text"
-                name="name"
-                id="name"
-                placeholder="e.g. IBM, Inc."
+                name="firstName"
+                id="firstName"
+                placeholder="e.g. Kai"
                 className="form-control"
-                value={company.name || ""}
+                value={contact.firstName || ""}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <div className="mb-3">
+              <label htmlFor="lastName">Last name</label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                placeholder="e.g. Doe"
+                className="form-control"
+                value={contact.lastName || ""}
                 onChange={handleChange}
               />
             </div>
@@ -78,28 +94,28 @@ const Edit = () => {
         <div className="row">
           <div className="col-md-6">
             <div className="mb-3">
-              <label htmlFor="website">Website</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="text"
-                name="website"
-                id="website"
-                placeholder="e.g. https://ibm.com"
+                name="email"
+                id="email"
+                placeholder="e.g. kai@ibm.com"
                 className="form-control"
-                value={company.website || ""}
+                value={contact.email || ""}
                 onChange={handleChange}
               />
             </div>
           </div>
           <div className="col-md-6">
             <div className="mb-3">
-              <label htmlFor="fax">Fax</label>
+              <label htmlFor="title">Title</label>
               <input
                 type="text"
-                name="fax"
-                id="fax"
-                placeholder="e.g. +01 111 222 33 44"
+                name="title"
+                id="title"
+                placeholder="e.g. Manager"
                 className="form-control"
-                value={company.fax || ""}
+                value={contact.title || ""}
                 onChange={handleChange}
               />
             </div>
@@ -115,7 +131,7 @@ const Edit = () => {
                 id="phone"
                 placeholder="e.g. +01 999 888 77 77"
                 className="form-control"
-                value={company.phone || ""}
+                value={contact.phone || ""}
                 onChange={handleChange}
               />
             </div>
@@ -129,7 +145,7 @@ const Edit = () => {
                 id="mobile"
                 placeholder="e.g. +01 999 111 00 00"
                 className="form-control"
-                value={company.mobile || ""}
+                value={contact.mobile || ""}
                 onChange={handleChange}
               />
             </div>
@@ -145,7 +161,7 @@ const Edit = () => {
                 id="address1"
                 placeholder="e.g. 101 A Building"
                 className="form-control"
-                value={company.address1 || ""}
+                value={contact.address1 || ""}
                 onChange={handleChange}
               />
             </div>
@@ -159,7 +175,7 @@ const Edit = () => {
                 id="address2"
                 placeholder="e.g. Main Street"
                 className="form-control"
-                value={company.address2 || ""}
+                value={contact.address2 || ""}
                 onChange={handleChange}
               />
             </div>
@@ -175,7 +191,7 @@ const Edit = () => {
                 id="address3"
                 placeholder="e.g. Opp. Gandhi Statue"
                 className="form-control"
-                value={company.address3 || ""}
+                value={contact.address3 || ""}
                 onChange={handleChange}
               />
             </div>
@@ -189,7 +205,7 @@ const Edit = () => {
                 id="city"
                 placeholder="e.g. Gotham City"
                 className="form-control"
-                value={company.city || ""}
+                value={contact.city || ""}
                 onChange={handleChange}
               />
             </div>
@@ -203,7 +219,7 @@ const Edit = () => {
                 name="state"
                 id="state"
                 className="form-select"
-                value={company.state || 0}
+                value={contact.state || 0}
                 onChange={handleChange}
               >
                 <option value="1">Taxas</option>
@@ -220,7 +236,7 @@ const Edit = () => {
                 id="zip"
                 placeholder="e.g. 350 001"
                 className="form-control"
-                value={company.zip || ""}
+                value={contact.zip || ""}
                 onChange={handleChange}
               />
             </div>
@@ -229,12 +245,26 @@ const Edit = () => {
         <div className="row">
           <div className="col-md-6">
             <div className="mb-3">
+              <label htmlFor="prefix">Prefix</label>
+              <input
+                type="text"
+                name="prefix"
+                id="prefix"
+                placeholder="e.g. Miss."
+                className="form-control"
+                value={contact.prefix || ""}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
               <label htmlFor="country">Country</label>
               <select
                 name="country"
                 id="country"
                 className="form-select"
-                value={company.country || 0}
+                value={contact.country || 0}
                 onChange={handleChange}
               >
                 <option value="1">India</option>
@@ -246,7 +276,7 @@ const Edit = () => {
 
         <div className="mb-3">
           <button type="submit" className="btn btn-primary me-2">
-            Update company
+            Update contact
           </button>
           <button onClick={handleCancel} className="btn btn-light me-2">
             Cancel

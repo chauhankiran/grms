@@ -34,6 +34,8 @@ app.use((err, req, res, next) => {
   console.log(err);
   if (err.code === "invalid_token") {
     res.status(401).json({ error: "Authentication token is expired" });
+  } else if (err.code === "credentials_required") {
+    res.status(401).json({ error: "No authorization token was found" });
   } else {
     res.status(500).json({ error: "Internal server error" });
   }

@@ -5,58 +5,75 @@ import Layout from "./Layout";
 
 const List = () => {
   const navigate = useNavigate();
-  const [companies, setCompanies] = useState([]);
+  const [contacts, setContacts] = useState([]);
+  const [listingOptions, setListingOptions] = useState({
+    size: 10,
+    page: 1,
+    sortDir: "desc",
+    sortBy: "id",
+    search: "",
+  });
 
   // TODO: Re-arrange this function into common one or place it inside other file.
-  const getCompanies = () => {
-    fetch(`${constants.API_ENDPOINT}/companies`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
+  const getContacts = (payload) => {
+    const { size, page, sortDir, sortBy, search } = payload;
+
+    fetch(
+      `${constants.API_ENDPOINT}/contacts?search=${search}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setCompanies(data.data))
+      .then((data) => setContacts(data.data))
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    getCompanies();
-  }, []);
+    getContacts(listingOptions);
+  }, [listingOptions]);
 
-  const handleAddCompany = () => {
-    navigate("/companies/add");
+  const handleAddContact = () => {
+    navigate("/contacts/add");
+  };
+
+  const handleSearch = (e) => {
+    setListingOptions({ ...listingOptions, search: e.target.value });
   };
 
   return (
     <Layout>
       <div className="row align-items-center">
         <div className="col-md-8 text-start">
-          <h1>Companies</h1>
+          <h1>Contacts</h1>
         </div>
         <div className="col-md-4 text-end">
-          <button className="btn btn-primary" onClick={handleAddCompany}>
-            Add company
+          <button className="btn btn-primary" onClick={handleAddContact}>
+            Add contact
           </button>
         </div>
       </div>
 
-      {/* TODO: Add search support. */}
       <input
         type="text"
         name="search"
         id="search"
         placeholder="Search"
         className="form-control"
+        value={listingOptions.search}
+        onChange={handleSearch}
       />
 
       <table className="table table-bordered table-hover my-4">
         <thead>
           <tr>
             <th>Id</th>
-            <th>Company name</th>
+            <th>Contact name</th>
             <th>Created by</th>
             <th>Created on</th>
             <th>Updated by</th>
@@ -64,22 +81,24 @@ const List = () => {
           </tr>
         </thead>
         <tbody>
-          {companies.length > 0 &&
-            companies.map((company) => {
+          {contacts.length > 0 &&
+            contacts.map((contact) => {
               return (
                 <tr>
                   <td>
-                    <Link to={`/companies/${company.id}`}>{company.id}</Link>
+                    <Link to={`/contacts/${contact.id}`}>{contact.id}</Link>
                   </td>
                   <td>
-                    <Link to={`/companies/${company.id}`}>{company.name}</Link>
+                    <Link to={`/contacts/${contact.id}`}>
+                      {contact.firstName + " " + contact.lastName}
+                    </Link>
                   </td>
                   {/* TODO: Display full name of the user. */}
-                  <td>{company.createdBy ? company.createdBy : "-"}</td>
+                  <td>{contact.createdBy ? contact.createdBy : "-"}</td>
                   {/* TODO: Time should be in human readable form using moment e.g. 2 hours ago */}
-                  <td>{company.createdOn ? company.createdOn : "-"}</td>
-                  <td>{company.updatedBy ? company.updatedBy : "-"}</td>
-                  <td>{company.updatedOn ? company.updatedOn : "-"}</td>
+                  <td>{contact.createdOn ? contact.createdOn : "-"}</td>
+                  <td>{contact.updatedBy ? contact.updatedBy : "-"}</td>
+                  <td>{contact.updatedOn ? contact.updatedOn : "-"}</td>
                 </tr>
               );
             })}
