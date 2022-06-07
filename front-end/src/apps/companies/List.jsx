@@ -59,7 +59,6 @@ const List = () => {
         </div>
       </div>
 
-      {/* TODO: Add search support. */}
       <input
         type="text"
         name="search"

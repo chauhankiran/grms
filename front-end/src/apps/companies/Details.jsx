@@ -34,7 +34,20 @@ const Details = () => {
 
   return (
     <Layout>
-      <h1>Details</h1>
+      <div className="row align-items-center">
+        <div className="col-md-8 text-start">
+          <h1>Details</h1>
+        </div>
+        <div className="col-md-4 text-end">
+          <button
+            type="button"
+            onClick={() => handleEdit(company.id)}
+            className="btn btn-primary me-2"
+          >
+            Edit company
+          </button>
+        </div>
+      </div>
 
       <div className="row">
         <div className="col-md-12">
@@ -121,16 +134,6 @@ const Details = () => {
             <span className="d-block fs-5">{company.country}</span>
           </div>
         </div>
-      </div>
-
-      <div className="mb-3">
-        <button
-          type="button"
-          onClick={() => handleEdit(company.id)}
-          className="btn btn-primary me-2"
-        >
-          Edit company
-        </button>
       </div>
     </Layout>
   );
