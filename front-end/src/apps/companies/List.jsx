@@ -6,28 +6,44 @@ import Layout from "./Layout";
 const List = () => {
   const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
+  const [listingOptions, setListingOptions] = useState({
+    size: 10,
+    page: 1,
+    sortDir: "desc",
+    sortBy: "id",
+    search: "",
+  });
 
   // TODO: Re-arrange this function into common one or place it inside other file.
-  const getCompanies = () => {
-    fetch(`${constants.API_ENDPOINT}/companies`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
+  const getCompanies = (payload) => {
+    const { size, page, sortDir, sortBy, search } = payload;
+
+    fetch(
+      `${constants.API_ENDPOINT}/companies?search=${search}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => setCompanies(data.data))
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    getCompanies();
-  }, []);
+    getCompanies(listingOptions);
+  }, [listingOptions]);
 
   const handleAddCompany = () => {
     navigate("/companies/add");
+  };
+
+  const handleSearch = (e) => {
+    setListingOptions({ ...listingOptions, search: e.target.value });
   };
 
   return (
@@ -43,13 +59,14 @@ const List = () => {
         </div>
       </div>
 
-      {/* TODO: Add search support. */}
       <input
         type="text"
         name="search"
         id="search"
         placeholder="Search"
         className="form-control"
+        value={listingOptions.search}
+        onChange={handleSearch}
       />
 
       <table className="table table-bordered table-hover my-4">

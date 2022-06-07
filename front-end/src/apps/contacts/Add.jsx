@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import constants from "../../constants";
 import Layout from "./Layout";
 
 const Add = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [contact, setContact] = useState({});
 
   const handleCancel = () => {
@@ -32,6 +33,12 @@ const Add = () => {
       .then((data) => navigate(`/contacts/${data.data}`))
       .catch((error) => console.log(error));
   };
+
+  useEffect(() => {
+    if (state) {
+      setContact({ ...contact, companyId: state.companyId });
+    }
+  }, [state]);
 
   return (
     <Layout>
