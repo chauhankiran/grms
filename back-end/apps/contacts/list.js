@@ -2,7 +2,7 @@ import connection from "../../database/connection.js";
 
 const list = async (req, res, next) => {
   try {
-    let { page, size, sortBy, sortDir, search } = req.query;
+    let { page, size, sortBy, sortDir, search, companyId } = req.query;
 
     if (!page) {
       page = 1;
@@ -28,6 +28,9 @@ const list = async (req, res, next) => {
         if (search) {
           query.whereLike("firstName", `${search}%`);
           query.orWhereLike("lastName", `${search}%`);
+        }
+        if (companyId) {
+          query.whereLike("companyId", `${companyId}%`);
         }
       })
       .select(
