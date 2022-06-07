@@ -22,20 +22,25 @@ const list = async (req, res, next) => {
       skip = (page - 1) * size;
     }
 
-    const companies = await connection("companies")
+    const contact = await connection("contacts")
       .where("active", 1)
       .modify((query) => {
         if (search) {
-          query.whereLike("name", `${search}%`);
+          query.whereLike("firstName", `${search}%`);
+          query.orWhereLike("lastName", `${search}%`);
         }
       })
       .select(
         "id",
-        "name",
-        "website",
+        "companyId",
+        "pointOfContact",
+        "firstName",
+        "lastName",
+        "prefix",
+        "title",
+        "email",
         "phone",
         "mobile",
-        "fax",
         "address1",
         "address2",
         "address3",
@@ -47,12 +52,14 @@ const list = async (req, res, next) => {
         "createdOn",
         "updatedBy",
         "updatedOn",
-        "active"
+        "active",
+        "archivedOn",
+        "archivedBy"
       )
       .offset(skip)
       .orderBy(sortBy, sortDir);
 
-    return res.status(200).json({ data: companies });
+    return res.status(200).json({ data: contact });
   } catch (error) {
     next(error);
   }

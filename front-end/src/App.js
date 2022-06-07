@@ -14,17 +14,23 @@ import CompanyDetails from "./apps/companies/Details";
 import CompanyAdd from "./apps/companies/Add";
 import CompanyEdit from "./apps/companies/Edit";
 
+// Contacts.
+import ContactList from "./apps/contacts/List";
+import ContactDetails from "./apps/contacts/Details";
+import ContactAdd from "./apps/contacts/Add";
+import ContactEdit from "./apps/contacts/Edit";
+
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
 
         {/* This looks clumsy. But, totally valid. TODO: Make it something interesting. */}
+        {/* Companies routes. */}
         <Route
           path="/companies"
           element={
@@ -54,6 +60,40 @@ const App = () => {
           element={
             <PrivateRoute>
               <CompanyEdit />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Contacts routes. */}
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute>
+              <ContactList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/contacts/:id"
+          element={
+            <PrivateRoute>
+              <ContactDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/contacts/add"
+          element={
+            <PrivateRoute>
+              <ContactAdd />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/contacts/:id/edit"
+          element={
+            <PrivateRoute>
+              <ContactEdit />
             </PrivateRoute>
           }
         />

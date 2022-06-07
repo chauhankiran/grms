@@ -8,6 +8,7 @@ import auth from "./middleware/auth.js";
 // routes imports
 import authRoutes from "./apps/auth/routes.js";
 import companyRoutes from "./apps/companies/routes.js";
+import contactRoutes from "./apps/contacts/routes.js";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.get("/check", (req, res) => {
 
 app.use("/v1/api/auth", authRoutes);
 app.use("/v1/api/companies", companyRoutes);
+app.use("/v1/api/contacts", contactRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json({ error: "4-0-4" });
@@ -32,6 +34,8 @@ app.use((err, req, res, next) => {
   console.log(err);
   if (err.code === "invalid_token") {
     res.status(401).json({ error: "Authentication token is expired" });
+  } else if (err.code === "credentials_required") {
+    res.status(401).json({ error: "No authorization token was found" });
   } else {
     res.status(500).json({ error: "Internal server error" });
   }
