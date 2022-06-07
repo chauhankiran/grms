@@ -12,6 +12,12 @@ const Details = () => {
     navigate(`/companies/${id}/edit`);
   };
 
+  const handleAddContact = () => {
+    navigate("/contacts/add", {
+      state: { fromPage: "companies", companyId: id },
+    });
+  };
+
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getCompany = () => {
     fetch(`${constants.API_ENDPOINT}/companies/${id}`, {
@@ -133,6 +139,21 @@ const Details = () => {
             <span className="d-block fw-500">Country</span>
             <span className="d-block fs-5">{company.country}</span>
           </div>
+        </div>
+      </div>
+
+      <div className="row align-items-center">
+        <div className="col-md-8 text-start">
+          <h3>Contacts</h3>
+        </div>
+        <div className="col-md-4 text-end">
+          <button
+            type="button"
+            onClick={handleAddContact}
+            className="btn btn-primary me-2"
+          >
+            Add contact
+          </button>
         </div>
       </div>
     </Layout>
