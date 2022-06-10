@@ -4,27 +4,19 @@ const details = async (req, res, next) => {
   const id = req.params.id;
 
   try {
-    const contact = await connection("contacts")
+    const deal = await connection("deals")
       .where("active", 1)
       .where("id", id)
       .select(
         "id",
         "companyId",
-        "pointOfContact",
-        "firstName",
-        "lastName",
-        "prefix",
-        "title",
-        "email",
-        "phone",
-        "mobile",
-        "address1",
-        "address2",
-        "address3",
-        "city",
-        "state",
-        "zip",
-        "country",
+        "contactId",
+        "name",
+        "status",
+        "stage",
+        "total",
+        "dueDate",
+        "closeDate",
         "createdBy",
         "createdOn",
         "updatedBy",
@@ -32,7 +24,7 @@ const details = async (req, res, next) => {
       )
       .first();
 
-    return res.status(200).json({ data: contact });
+    return res.status(200).json({ data: deal });
   } catch (error) {
     next(error);
   }

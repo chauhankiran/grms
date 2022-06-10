@@ -61,3 +61,22 @@ CREATE TABLE contacts (
   archivedBy INTEGER
 );
 
+--- `deals` table.
+CREATE TABLE deals (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  companyId INTEGER,
+  contactId INTEGER,
+  name TEXT,
+  status INTEGER,     --- Pickup
+  stage INTEGER,      --- Pickup
+  total INTEGER,
+  dueDate TEXT,
+  closeDate TEXT,
+  createdBy INTEGER,
+  createdOn TEXT,
+  updatedBy INTEGER,
+  updatedOn TEXT,
+  active INTEGER,
+  archivedOn TEXT,
+  archivedBy INTEGER
+);
