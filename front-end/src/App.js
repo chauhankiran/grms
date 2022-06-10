@@ -20,6 +20,12 @@ import ContactDetails from "./apps/contacts/Details";
 import ContactAdd from "./apps/contacts/Add";
 import ContactEdit from "./apps/contacts/Edit";
 
+// Deals.
+import DealList from "./apps/deals/List";
+import DealDetails from "./apps/deals/Details";
+import DealAdd from "./apps/deals/Add";
+import DealEdit from "./apps/deals/Edit";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -94,6 +100,40 @@ const App = () => {
           element={
             <PrivateRoute>
               <ContactEdit />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Deals routes. */}
+        <Route
+          path="/deals"
+          element={
+            <PrivateRoute>
+              <DealList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/deals/:id"
+          element={
+            <PrivateRoute>
+              <DealDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/deals/add"
+          element={
+            <PrivateRoute>
+              <DealAdd />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/deals/:id/edit"
+          element={
+            <PrivateRoute>
+              <DealEdit />
             </PrivateRoute>
           }
         />

@@ -23,7 +23,8 @@ const details = async (req, res, next) => {
         "country",
         "createdBy",
         "createdOn",
-        "active"
+        "updatedBy",
+        "updatedOn"
       )
       .first();
 

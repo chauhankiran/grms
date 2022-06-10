@@ -49,6 +49,11 @@ const Nav = () => {
                 Contacts
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to="/deals" className="nav-link">
+                Deals
+              </NavLink>
+            </li>
           </ul>
 
           <ul className="navbar-nav">
