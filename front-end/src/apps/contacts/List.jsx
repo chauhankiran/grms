@@ -84,7 +84,7 @@ const List = () => {
           {contacts.length > 0 &&
             contacts.map((contact) => {
               return (
-                <tr>
+                <tr key={contact.id}>
                   <td>
                     <Link to={`/contacts/${contact.id}`}>{contact.id}</Link>
                   </td>
