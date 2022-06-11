@@ -8,6 +8,9 @@ import Login from "./apps/auth/Login";
 import Register from "./apps/auth/Register";
 import Reset from "./apps/auth/Reset";
 
+// Dashboard.
+import Dashboard from "./apps/dashboard/Dashboard";
+
 // Companies.
 import CompanyList from "./apps/companies/List";
 import CompanyDetails from "./apps/companies/Details";
@@ -54,6 +57,15 @@ const App = () => {
         <Route path="/reset" element={<Reset />} />
 
         {/* This looks clumsy. But, totally valid. TODO: Make it something interesting. */}
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
         {/* Companies routes. */}
         <Route
           path="/companies"

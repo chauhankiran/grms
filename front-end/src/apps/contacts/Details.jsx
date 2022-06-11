@@ -285,7 +285,7 @@ const Details = () => {
         type="text"
         name="deals"
         id="deals"
-        placeholder="Deals"
+        placeholder="Search"
         className="form-control"
         value={listingOptions.deals}
         onChange={(e) => handleSearch(e, "deals")}
@@ -348,7 +348,7 @@ const Details = () => {
         type="text"
         name="quotes"
         id="quotes"
-        placeholder="Quotes"
+        placeholder="Search"
         className="form-control"
         value={listingOptions.quotes}
         onChange={(e) => handleSearch(e, "quotes")}
@@ -411,7 +411,7 @@ const Details = () => {
         type="text"
         name="tickets"
         id="tickets"
-        placeholder="Tickets"
+        placeholder="Search"
         className="form-control"
         value={listingOptions.tickets}
         onChange={(e) => handleSearch(e, "tickets")}
@@ -478,7 +478,7 @@ const Details = () => {
         type="text"
         name="tasks"
         id="tasks"
-        placeholder="Tasks"
+        placeholder="Search"
         className="form-control"
         value={listingOptions.tasks}
         onChange={(e) => handleSearch(e, "tasks")}

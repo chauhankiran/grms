@@ -162,7 +162,7 @@ const Details = () => {
         type="text"
         name="tickets"
         id="tickets"
-        placeholder="Tickets"
+        placeholder="Search"
         className="form-control"
         value={listingOptions.tickets}
         onChange={(e) => handleSearch(e, "tickets")}
@@ -229,7 +229,7 @@ const Details = () => {
         type="text"
         name="tasks"
         id="tasks"
-        placeholder="Tasks"
+        placeholder="Search"
         className="form-control"
         value={listingOptions.tasks}
         onChange={(e) => handleSearch(e, "tasks")}
