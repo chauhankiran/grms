@@ -10,6 +10,7 @@ import authRoutes from "./apps/auth/routes.js";
 import companyRoutes from "./apps/companies/routes.js";
 import contactRoutes from "./apps/contacts/routes.js";
 import dealRoutes from "./apps/deals/routes.js";
+import quoteRoutes from "./apps/quotes/routes.js";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/v1/api/auth", authRoutes);
 app.use("/v1/api/companies", companyRoutes);
 app.use("/v1/api/contacts", contactRoutes);
 app.use("/v1/api/deals", dealRoutes);
+app.use("/v1/api/quotes", quoteRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json({ error: "4-0-4" });

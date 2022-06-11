@@ -5,7 +5,7 @@ import Layout from "./Layout";
 
 const List = () => {
   const navigate = useNavigate();
-  const [companies, setCompanies] = useState([]);
+  const [quotes, setQuotes] = useState([]);
   const [listingOptions, setListingOptions] = useState({
     size: 10,
     page: 1,
@@ -15,11 +15,11 @@ const List = () => {
   });
 
   // TODO: Re-arrange this function into common one or place it inside other file.
-  const getCompanies = (payload) => {
+  const getQuotes = (payload) => {
     const { size, page, sortDir, sortBy, search } = payload;
 
     fetch(
-      `${constants.API_ENDPOINT}/companies?search=${search}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
+      `${constants.API_ENDPOINT}/quotes?search=${search}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
       {
         method: "GET",
         headers: {
@@ -30,16 +30,16 @@ const List = () => {
       }
     )
       .then((res) => res.json())
-      .then((data) => setCompanies(data.data))
+      .then((data) => setQuotes(data.data))
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    getCompanies(listingOptions);
+    getQuotes(listingOptions);
   }, [listingOptions]);
 
-  const handleAddCompany = () => {
-    navigate("/companies/add");
+  const handleAddQuote = () => {
+    navigate("/quotes/add");
   };
 
   const handleSearch = (e) => {
@@ -50,11 +50,11 @@ const List = () => {
     <Layout>
       <div className="row align-items-center">
         <div className="col-md-8 text-start">
-          <h1>Companies</h1>
+          <h1>Quotes</h1>
         </div>
         <div className="col-md-4 text-end">
-          <button className="btn btn-primary" onClick={handleAddCompany}>
-            Add company
+          <button className="btn btn-primary" onClick={handleAddQuote}>
+            Add quote
           </button>
         </div>
       </div>
@@ -73,7 +73,7 @@ const List = () => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Company name</th>
+            <th>Deal name</th>
             <th>Created by</th>
             <th>Created on</th>
             <th>Updated by</th>
@@ -81,22 +81,22 @@ const List = () => {
           </tr>
         </thead>
         <tbody>
-          {companies.length > 0 &&
-            companies.map((company) => {
+          {quotes.length > 0 &&
+            quotes.map((quote) => {
               return (
-                <tr key={company.id}>
+                <tr key={quote.id}>
                   <td>
-                    <Link to={`/companies/${company.id}`}>{company.id}</Link>
+                    <Link to={`/quotes/${quote.id}`}>{quote.id}</Link>
                   </td>
                   <td>
-                    <Link to={`/companies/${company.id}`}>{company.name}</Link>
+                    <Link to={`/quotes/${quote.id}`}>{quote.name}</Link>
                   </td>
                   {/* TODO: Display full name of the user. */}
-                  <td>{company.createdBy ? company.createdBy : "-"}</td>
+                  <td>{quote.createdBy ? quote.createdBy : "-"}</td>
                   {/* TODO: Time should be in human readable form using moment e.g. 2 hours ago */}
-                  <td>{company.createdOn ? company.createdOn : "-"}</td>
-                  <td>{company.updatedBy ? company.updatedBy : "-"}</td>
-                  <td>{company.updatedOn ? company.updatedOn : "-"}</td>
+                  <td>{quote.createdOn ? quote.createdOn : "-"}</td>
+                  <td>{quote.updatedBy ? quote.updatedBy : "-"}</td>
+                  <td>{quote.updatedOn ? quote.updatedOn : "-"}</td>
                 </tr>
               );
             })}

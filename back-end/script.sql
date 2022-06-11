@@ -62,6 +62,7 @@ CREATE TABLE contacts (
 );
 
 --- `deals` table.
+---- TODO: Update dueDate to dueOn, closeDate to closeOn.
 CREATE TABLE deals (
   id INTEGER PRIMARY KEY AUTOINCREMENT, 
   companyId INTEGER,
@@ -72,6 +73,24 @@ CREATE TABLE deals (
   total INTEGER,
   dueDate TEXT,
   closeDate TEXT,
+  createdBy INTEGER,
+  createdOn TEXT,
+  updatedBy INTEGER,
+  updatedOn TEXT,
+  active INTEGER,
+  archivedOn TEXT,
+  archivedBy INTEGER
+);
+
+--- `quotes` table.
+CREATE TABLE quotes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  companyId INTEGER,
+  contactId INTEGER,
+  dealId INTEGER,
+  name TEXT,
+  total INTEGER,
+  expireOn TEXT,
   createdBy INTEGER,
   createdOn TEXT,
   updatedBy INTEGER,

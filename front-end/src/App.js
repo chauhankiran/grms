@@ -26,6 +26,12 @@ import DealDetails from "./apps/deals/Details";
 import DealAdd from "./apps/deals/Add";
 import DealEdit from "./apps/deals/Edit";
 
+// Quotes.
+import QuoteList from "./apps/quotes/List";
+import QuoteDetails from "./apps/quotes/Details";
+import QuoteAdd from "./apps/quotes/Add";
+import QuoteEdit from "./apps/quotes/Edit";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -134,6 +140,40 @@ const App = () => {
           element={
             <PrivateRoute>
               <DealEdit />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Quotes routes. */}
+        <Route
+          path="/quotes"
+          element={
+            <PrivateRoute>
+              <QuoteList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/quotes/:id"
+          element={
+            <PrivateRoute>
+              <QuoteDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/quotes/add"
+          element={
+            <PrivateRoute>
+              <QuoteAdd />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/quotes/:id/edit"
+          element={
+            <PrivateRoute>
+              <QuoteEdit />
             </PrivateRoute>
           }
         />
