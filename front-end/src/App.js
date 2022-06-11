@@ -38,6 +38,12 @@ import TicketDetails from "./apps/tickets/Details";
 import TicketAdd from "./apps/tickets/Add";
 import TicketEdit from "./apps/tickets/Edit";
 
+// Tasks.
+import TaskList from "./apps/tasks/List";
+import TaskDetails from "./apps/tasks/Details";
+import TaskAdd from "./apps/tasks/Add";
+import TaskEdit from "./apps/tasks/Edit";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -214,6 +220,40 @@ const App = () => {
           element={
             <PrivateRoute>
               <TicketEdit />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Tasks routes. */}
+        <Route
+          path="/tasks"
+          element={
+            <PrivateRoute>
+              <TaskList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tasks/:id"
+          element={
+            <PrivateRoute>
+              <TaskDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tasks/add"
+          element={
+            <PrivateRoute>
+              <TaskAdd />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tasks/:id/edit"
+          element={
+            <PrivateRoute>
+              <TaskEdit />
             </PrivateRoute>
           }
         />

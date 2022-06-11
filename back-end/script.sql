@@ -119,3 +119,21 @@ CREATE TABLE tickets (
   archivedOn TEXT,
   archivedBy INTEGER
 );
+
+--- `tasks` table.
+CREATE TABLE tasks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  companyId INTEGER,
+  contactId INTEGER,
+  dealId INTEGER,
+  ticketId INTEGER,
+  title TEXT,
+  time TEXT,
+  createdBy INTEGER,
+  createdOn TEXT,
+  updatedBy INTEGER,
+  updatedOn TEXT,
+  active INTEGER,
+  archivedOn TEXT,
+  archivedBy INTEGER
+);

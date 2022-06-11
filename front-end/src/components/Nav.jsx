@@ -66,6 +66,12 @@ const Nav = () => {
                 Tickets
               </NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink to="/tasks" className="nav-link">
+                Tasks
+              </NavLink>
+            </li>
           </ul>
 
           <ul className="navbar-nav">
