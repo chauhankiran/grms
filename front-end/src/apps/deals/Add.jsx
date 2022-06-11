@@ -36,7 +36,11 @@ const Add = () => {
 
   useEffect(() => {
     if (state) {
-      setDeal({ ...deal, companyId: state.companyId });
+      if (state.fromPage === "companies") {
+        setDeal({ ...deal, companyId: state.companyId });
+      } else if (state.fromPage === "contacts") {
+        setDeal({ ...deal, contactId: state.contactId });
+      }
     }
   }, [state]);
 

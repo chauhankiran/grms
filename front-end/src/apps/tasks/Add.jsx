@@ -36,7 +36,17 @@ const Add = () => {
 
   useEffect(() => {
     if (state) {
-      setTask({ ...task, companyId: state.companyId });
+      if (state.fromPage === "companies") {
+        setTask({ ...task, companyId: state.companyId });
+      } else if (state.fromPage === "contacts") {
+        setTask({ ...task, contactId: state.contactId });
+      } else if (state.fromPage === "deals") {
+        setTask({ ...task, dealId: state.dealId });
+      } else if (state.fromPage === "quotes") {
+        setTask({ ...task, quoteId: state.quoteId });
+      } else if (state.fromPage === "tickets") {
+        setTask({ ...task, ticketId: state.ticketId });
+      }
     }
   }, [state]);
 

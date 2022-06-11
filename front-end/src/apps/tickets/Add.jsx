@@ -36,7 +36,11 @@ const Add = () => {
 
   useEffect(() => {
     if (state) {
-      setTicket({ ...ticket, companyId: state.companyId });
+      if (state.fromPage === "companies") {
+        setTicket({ ...ticket, companyId: state.companyId });
+      } else if (state.fromPage === "contacts") {
+        setTicket({ ...ticket, contactId: state.contactId });
+      }
     }
   }, [state]);
 
