@@ -8,6 +8,7 @@ const create = async (req, res, next) => {
         companyId: req.body.companyId || 0,
         contactId: req.body.contactId || 0,
         dealId: req.body.dealId || 0,
+        quoteId: req.body.quoteId || 0,
         ticketId: req.body.ticketId || 0,
         title: req.body.title || "",
         time: req.body.time || "",
