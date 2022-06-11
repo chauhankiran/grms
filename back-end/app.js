@@ -12,6 +12,7 @@ import contactRoutes from "./apps/contacts/routes.js";
 import dealRoutes from "./apps/deals/routes.js";
 import quoteRoutes from "./apps/quotes/routes.js";
 import ticketRoutes from "./apps/tickets/routes.js";
+import taskRoutes from "./apps/tasks/routes.js";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/v1/api/contacts", contactRoutes);
 app.use("/v1/api/deals", dealRoutes);
 app.use("/v1/api/quotes", quoteRoutes);
 app.use("/v1/api/tickets", ticketRoutes);
+app.use("/v1/api/tasks", taskRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json({ error: "4-0-4" });
