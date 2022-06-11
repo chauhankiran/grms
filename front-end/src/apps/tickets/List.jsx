@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ListSearch from "../../components/ListSearch";
 import constants from "../../constants";
 import Layout from "./Layout";
 
@@ -59,15 +60,8 @@ const List = () => {
         </div>
       </div>
 
-      <input
-        type="text"
-        name="search"
-        id="search"
-        placeholder="Search"
-        className="form-control"
-        value={listingOptions.search}
-        onChange={handleSearch}
-      />
+      {/* Inline search on tickets. */}
+      <ListSearch search={listingOptions.search} handleSearch={handleSearch} />
 
       <table className="table table-bordered table-hover my-4">
         <thead>
