@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ListSearch from "../../components/ListSearch";
@@ -87,10 +88,13 @@ const List = () => {
                   </td>
                   {/* TODO: Display full name of the user. */}
                   <td>{deal.createdBy ? deal.createdBy : "-"}</td>
-                  {/* TODO: Time should be in human readable form using moment e.g. 2 hours ago */}
-                  <td>{deal.createdOn ? deal.createdOn : "-"}</td>
+                  <td>
+                    {deal.createdOn ? moment(deal.createdOn).fromNow() : "-"}
+                  </td>
                   <td>{deal.updatedBy ? deal.updatedBy : "-"}</td>
-                  <td>{deal.updatedOn ? deal.updatedOn : "-"}</td>
+                  <td>
+                    {deal.updatedOn ? moment(deal.updatedOn).fromNow() : "-"}
+                  </td>
                 </tr>
               );
             })}
