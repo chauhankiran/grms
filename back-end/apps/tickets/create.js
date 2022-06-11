@@ -7,6 +7,8 @@ const create = async (req, res, next) => {
       .insert({
         companyId: req.body.companyId || 0,
         contactId: req.body.contactId || 0,
+        dealId: req.body.dealId || 0,
+        quoteId: req.body.quoteId || 0,
         title: req.body.title || "",
         priority: req.body.priority || 0,
         assignee: req.body.assignee || 0,

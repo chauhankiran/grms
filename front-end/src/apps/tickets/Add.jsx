@@ -40,6 +40,10 @@ const Add = () => {
         setTicket({ ...ticket, companyId: state.companyId });
       } else if (state.fromPage === "contacts") {
         setTicket({ ...ticket, contactId: state.contactId });
+      } else if (state.fromPage === "deals") {
+        setTicket({ ...ticket, dealId: state.dealId });
+      } else if (state.fromPage === "quotes") {
+        setTicket({ ...ticket, quoteId: state.quoteId });
       }
     }
   }, [state]);

@@ -157,7 +157,7 @@ const Details = () => {
           <button
             type="button"
             onClick={() => handleEdit(contact.id)}
-            className="btn btn-primary me-2"
+            className="btn btn-primary"
           >
             Edit contact
           </button>

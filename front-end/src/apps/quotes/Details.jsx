@@ -8,6 +8,7 @@ const Details = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [quote, setQuote] = useState({});
+  const [tickets, setTickets] = useState([]);
   const [tasks, setTasks] = useState([]);
   // May be if required, then divide into seperate state for each section.
   const [listingOptions, setListingOptions] = useState({
@@ -15,6 +16,7 @@ const Details = () => {
     page: 1,
     sortDir: "desc",
     sortBy: "id",
+    tickets: "",
     tasks: "",
     quoteId: id,
   });
@@ -50,6 +52,26 @@ const Details = () => {
   }, []);
 
   // TODO: Re-arrange this function into common one or place it inside other file.
+  const getTickets = (payload) => {
+    const { size, page, sortDir, sortBy, tickets, quoteId } = payload;
+
+    fetch(
+      `${constants.API_ENDPOINT}/tickets?quoteId=${quoteId}&search=${tickets}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setTickets(data.data))
+      .catch((error) => console.log(error));
+  };
+
+  // TODO: Re-arrange this function into common one or place it inside other file.
   const getTasks = (payload) => {
     const { size, page, sortDir, sortBy, tasks, quoteId } = payload;
 
@@ -71,6 +93,7 @@ const Details = () => {
 
   // TODO: Dep. should be specefic as it currently re-render every search in different section.
   useEffect(() => {
+    getTickets(listingOptions);
     getTasks(listingOptions);
   }, [listingOptions]);
 
@@ -88,7 +111,7 @@ const Details = () => {
           <button
             type="button"
             onClick={() => handleEdit(quote.id)}
-            className="btn btn-primary me-2"
+            className="btn btn-primary"
           >
             Edit quote
           </button>
@@ -118,6 +141,73 @@ const Details = () => {
           </div>
         </div>
       </div>
+
+      {/* Inline tickets section. */}
+      <div className="row align-items-center mb-2">
+        <div className="col-md-8 text-start">
+          <h3>Tickets</h3>
+        </div>
+        <div className="col-md-4 text-end">
+          <button
+            type="button"
+            onClick={() => handleAdd("tickets")}
+            className="btn btn-primary"
+          >
+            Add ticket
+          </button>
+        </div>
+      </div>
+
+      <input
+        type="text"
+        name="tickets"
+        id="tickets"
+        placeholder="Tickets"
+        className="form-control"
+        value={listingOptions.tickets}
+        onChange={(e) => handleSearch(e, "tickets")}
+      />
+
+      <table className="table table-bordered table-hover my-4">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Created by</th>
+            <th>Created on</th>
+            <th>Updated by</th>
+            <th>Updated on</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tickets.length > 0 &&
+            tickets.map((ticket) => {
+              return (
+                <tr key={ticket.id}>
+                  <td>
+                    <Link to={`/tickets/${ticket.id}`}>{ticket.id}</Link>
+                  </td>
+                  <td>
+                    <Link to={`/tickets/${ticket.id}`}>{ticket.title}</Link>
+                  </td>
+                  {/* TODO: Display full name of the user. */}
+                  <td>{ticket.createdBy ? ticket.createdBy : "-"}</td>
+                  <td>
+                    {ticket.createdOn
+                      ? moment(ticket.createdOn).fromNow()
+                      : "-"}
+                  </td>
+                  <td>{ticket.updatedBy ? ticket.updatedBy : "-"}</td>
+                  <td>
+                    {ticket.updatedOn
+                      ? moment(ticket.updatedOn).fromNow()
+                      : "-"}
+                  </td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
 
       {/* Inline tasks section. */}
       <div className="row align-items-center mb-2">

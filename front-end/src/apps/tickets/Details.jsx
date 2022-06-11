@@ -88,7 +88,7 @@ const Details = () => {
           <button
             type="button"
             onClick={() => handleEdit(ticket.id)}
-            className="btn btn-primary me-2"
+            className="btn btn-primary"
           >
             Edit ticket
           </button>
