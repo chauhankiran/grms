@@ -73,7 +73,7 @@ const List = () => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Deal name</th>
+            <th>Quote name</th>
             <th>Created by</th>
             <th>Created on</th>
             <th>Updated by</th>

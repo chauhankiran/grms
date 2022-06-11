@@ -89,10 +89,10 @@ const Edit = () => {
               >
                 <option value="0">None</option>
                 <option value="1">Low</option>
-                <option value="2">Normal</option>
-                <option value="2">Medium</option>
-                <option value="2">High</option>
-                <option value="2">Urgent</option>
+                <option value="3">Normal</option>
+                <option value="4">Medium</option>
+                <option value="5">High</option>
+                <option value="6">Urgent</option>
               </select>
             </div>
           </div>
@@ -109,9 +109,9 @@ const Edit = () => {
                 <option value="0">None</option>
                 <option value="1">Created</option>
                 <option value="2">Assigned</option>
-                <option value="2">In progress</option>
-                <option value="2">Review</option>
-                <option value="2">Closed</option>
+                <option value="3">In progress</option>
+                <option value="4">Review</option>
+                <option value="5">Closed</option>
               </select>
             </div>
           </div>
@@ -131,9 +131,9 @@ const Edit = () => {
                 <option value="0">None</option>
                 <option value="1">Jane</option>
                 <option value="2">Kai</option>
-                <option value="2">Marry</option>
-                <option value="2">Julia</option>
-                <option value="2">Will</option>
+                <option value="3">Marry</option>
+                <option value="4">Julia</option>
+                <option value="5">Will</option>
               </select>
             </div>
           </div>
@@ -150,9 +150,9 @@ const Edit = () => {
                 <option value="0">None</option>
                 <option value="1">Question</option>
                 <option value="2">Bug</option>
-                <option value="2">Enhancement</option>
-                <option value="2">Doc</option>
-                <option value="2">UI</option>
+                <option value="3">Enhancement</option>
+                <option value="4">Doc</option>
+                <option value="5">UI</option>
               </select>
             </div>
           </div>

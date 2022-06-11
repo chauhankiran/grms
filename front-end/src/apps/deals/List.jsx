@@ -84,7 +84,7 @@ const List = () => {
           {deals.length > 0 &&
             deals.map((deal) => {
               return (
-                <tr>
+                <tr key={deal.id}>
                   <td>
                     <Link to={`/deals/${deal.id}`}>{deal.id}</Link>
                   </td>
