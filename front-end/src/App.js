@@ -32,6 +32,12 @@ import QuoteDetails from "./apps/quotes/Details";
 import QuoteAdd from "./apps/quotes/Add";
 import QuoteEdit from "./apps/quotes/Edit";
 
+// Tickets.
+import TicketList from "./apps/tickets/List";
+import TicketDetails from "./apps/tickets/Details";
+import TicketAdd from "./apps/tickets/Add";
+import TicketEdit from "./apps/tickets/Edit";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -174,6 +180,40 @@ const App = () => {
           element={
             <PrivateRoute>
               <QuoteEdit />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Quotes routes. */}
+        <Route
+          path="/tickets"
+          element={
+            <PrivateRoute>
+              <TicketList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tickets/:id"
+          element={
+            <PrivateRoute>
+              <TicketDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tickets/add"
+          element={
+            <PrivateRoute>
+              <TicketAdd />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tickets/:id/edit"
+          element={
+            <PrivateRoute>
+              <TicketEdit />
             </PrivateRoute>
           }
         />

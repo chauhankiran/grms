@@ -99,3 +99,23 @@ CREATE TABLE quotes (
   archivedOn TEXT,
   archivedBy INTEGER
 );
+
+--- `tickets` table.
+CREATE TABLE tickets (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  companyId INTEGER,
+  contactId INTEGER,
+  title TEXT,
+  priority INTEGER,
+  assignee INTEGER,
+  status INTEGER,
+  type INTEGER,
+  dueOn TEXT,
+  createdBy INTEGER,
+  createdOn TEXT,
+  updatedBy INTEGER,
+  updatedOn TEXT,
+  active INTEGER,
+  archivedOn TEXT,
+  archivedBy INTEGER
+);
