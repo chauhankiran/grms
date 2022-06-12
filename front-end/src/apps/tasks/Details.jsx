@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import constants from "../../constants";
 import Layout from "./Layout";
+
+import getDetails from "../../services/getDetails";
 
 const Details = () => {
   const navigate = useNavigate();
@@ -14,15 +15,7 @@ const Details = () => {
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getTask = () => {
-    fetch(`${constants.API_ENDPOINT}/tasks/${id}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
+    getDetails("tasks", id)
       .then((data) => setTask(data.data))
       .catch((error) => console.log(error));
   };

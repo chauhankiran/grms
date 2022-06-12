@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import constants from "../../constants";
 import Layout from "./Layout";
+
+import getList from "../../services/getList";
+import getDetails from "../../services/getDetails";
 
 import ContactsTable from "../contacts/Table";
 import DealsTable from "../deals/Table";
@@ -43,15 +45,7 @@ const Details = () => {
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getCompany = () => {
-    fetch(`${constants.API_ENDPOINT}/companies/${id}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
+    getDetails("companies", id)
       .then((data) => setCompany(data.data))
       .catch((error) => console.log(error));
   };
@@ -63,100 +57,35 @@ const Details = () => {
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getContacts = (payload) => {
-    const { size, page, sortDir, sortBy, contacts, companyId } = payload;
-
-    fetch(
-      `${constants.API_ENDPOINT}/contacts?companyId=${companyId}&search=${contacts}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    )
-      .then((res) => res.json())
+    getList("contacts", payload)
       .then((data) => setContacts(data.data))
       .catch((error) => console.log(error));
   };
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getDeals = (payload) => {
-    const { size, page, sortDir, sortBy, deals, companyId } = payload;
-
-    fetch(
-      `${constants.API_ENDPOINT}/deals?companyId=${companyId}&search=${deals}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    )
-      .then((res) => res.json())
+    getList("deals", payload)
       .then((data) => setDeals(data.data))
       .catch((error) => console.log(error));
   };
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getQuotes = (payload) => {
-    const { size, page, sortDir, sortBy, quotes, companyId } = payload;
-
-    fetch(
-      `${constants.API_ENDPOINT}/quotes?companyId=${companyId}&search=${quotes}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    )
-      .then((res) => res.json())
+    getList("quotes", payload)
       .then((data) => setQuotes(data.data))
       .catch((error) => console.log(error));
   };
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getTickets = (payload) => {
-    const { size, page, sortDir, sortBy, tickets, companyId } = payload;
-
-    fetch(
-      `${constants.API_ENDPOINT}/tickets?companyId=${companyId}&search=${tickets}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    )
-      .then((res) => res.json())
+    getList("tickets", payload)
       .then((data) => setTickets(data.data))
       .catch((error) => console.log(error));
   };
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getTasks = (payload) => {
-    const { size, page, sortDir, sortBy, tasks, companyId } = payload;
-
-    fetch(
-      `${constants.API_ENDPOINT}/tasks?companyId=${companyId}&search=${tasks}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    )
-      .then((res) => res.json())
+    getList("tasks", payload)
       .then((data) => setTasks(data.data))
       .catch((error) => console.log(error));
   };

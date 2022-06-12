@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import constants from "../../constants";
 import Layout from "./Layout";
+
+import getList from "../../services/getList";
+import getDetails from "../../services/getDetails";
 
 import TasksTable from "../tasks/Table";
 
@@ -32,15 +34,7 @@ const Details = () => {
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getTicket = () => {
-    fetch(`${constants.API_ENDPOINT}/tickets/${id}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
+    getDetails("tickets", id)
       .then((data) => setTicket(data.data))
       .catch((error) => console.log(error));
   };
@@ -52,20 +46,7 @@ const Details = () => {
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getTasks = (payload) => {
-    const { size, page, sortDir, sortBy, tasks, ticketId } = payload;
-
-    fetch(
-      `${constants.API_ENDPOINT}/tasks?ticketId=${ticketId}&search=${tasks}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    )
-      .then((res) => res.json())
+    getList("tasks", payload)
       .then((data) => setTasks(data.data))
       .catch((error) => console.log(error));
   };
