@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListSearch from "../../components/ListSearch";
-import constants from "../../constants";
+import getList from "../../services/getList";
 import Layout from "./Layout";
 import Table from "./Table";
 
@@ -18,20 +18,7 @@ const List = () => {
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getContacts = (payload) => {
-    const { size, page, sortDir, sortBy, search } = payload;
-
-    fetch(
-      `${constants.API_ENDPOINT}/contacts?search=${search}&size=${size}&page=${page}&sortDir=${sortDir}&sortBy=${sortBy}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    )
-      .then((res) => res.json())
+    getList("contacts", payload)
       .then((data) => setContacts(data.data))
       .catch((error) => console.log(error));
   };
