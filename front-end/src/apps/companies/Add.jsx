@@ -86,6 +86,8 @@ const Add = () => {
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-md-12">
+            {/* TODO: Field should be conditional. If field is enable from admin, then
+            only display else not. Also, add guard for future code enhancement. */}
             <div className="mb-3">
               <label htmlFor="name">Company name</label>
               <input

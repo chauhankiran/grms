@@ -1,8 +1,12 @@
-import moment from "moment";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import constants from "../../constants";
 import Layout from "./Layout";
+
+import DealsTable from "../deals/Table";
+import QuotesTable from "../quotes/Table";
+import TicketsTable from "../tickets/Table";
+import TasksTable from "../tasks/Table";
 
 const Details = () => {
   const navigate = useNavigate();
@@ -291,42 +295,7 @@ const Details = () => {
         onChange={(e) => handleSearch(e, "deals")}
       />
 
-      <table className="table table-bordered table-hover my-4">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Deal name</th>
-            <th>Created by</th>
-            <th>Created on</th>
-            <th>Updated by</th>
-            <th>Updated on</th>
-          </tr>
-        </thead>
-        <tbody>
-          {deals.length > 0 &&
-            deals.map((deal) => {
-              return (
-                <tr key={deal.id}>
-                  <td>
-                    <Link to={`/deals/${deal.id}`}>{deal.id}</Link>
-                  </td>
-                  <td>
-                    <Link to={`/deals/${deal.id}`}>{deal.name}</Link>
-                  </td>
-                  {/* TODO: Display full name of the user. */}
-                  <td>{deal.createdBy ? deal.createdBy : "-"}</td>
-                  <td>
-                    {deal.createdOn ? moment(deal.createdOn).fromNow() : "-"}
-                  </td>
-                  <td>{deal.updatedBy ? deal.updatedBy : "-"}</td>
-                  <td>
-                    {deal.updatedOn ? moment(deal.updatedOn).fromNow() : "-"}
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      <DealsTable deals={deals} />
 
       {/* Inline quotes section. */}
       <div className="row align-items-center mb-2">
@@ -354,42 +323,7 @@ const Details = () => {
         onChange={(e) => handleSearch(e, "quotes")}
       />
 
-      <table className="table table-bordered table-hover my-4">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Quote name</th>
-            <th>Created by</th>
-            <th>Created on</th>
-            <th>Updated by</th>
-            <th>Updated on</th>
-          </tr>
-        </thead>
-        <tbody>
-          {quotes.length > 0 &&
-            quotes.map((quote) => {
-              return (
-                <tr key={quote.id}>
-                  <td>
-                    <Link to={`/quotes/${quote.id}`}>{quote.id}</Link>
-                  </td>
-                  <td>
-                    <Link to={`/quotes/${quote.id}`}>{quote.name}</Link>
-                  </td>
-                  {/* TODO: Display full name of the user. */}
-                  <td>{quote.createdBy ? quote.createdBy : "-"}</td>
-                  <td>
-                    {quote.createdOn ? moment(quote.createdOn).fromNow() : "-"}
-                  </td>
-                  <td>{quote.updatedBy ? quote.updatedBy : "-"}</td>
-                  <td>
-                    {quote.updatedOn ? moment(quote.updatedOn).fromNow() : "-"}
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      <QuotesTable quotes={quotes} />
 
       {/* Inline tickets section. */}
       <div className="row align-items-center mb-2">
@@ -417,46 +351,7 @@ const Details = () => {
         onChange={(e) => handleSearch(e, "tickets")}
       />
 
-      <table className="table table-bordered table-hover my-4">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Created by</th>
-            <th>Created on</th>
-            <th>Updated by</th>
-            <th>Updated on</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tickets.length > 0 &&
-            tickets.map((ticket) => {
-              return (
-                <tr key={ticket.id}>
-                  <td>
-                    <Link to={`/tickets/${ticket.id}`}>{ticket.id}</Link>
-                  </td>
-                  <td>
-                    <Link to={`/tickets/${ticket.id}`}>{ticket.title}</Link>
-                  </td>
-                  {/* TODO: Display full name of the user. */}
-                  <td>{ticket.createdBy ? ticket.createdBy : "-"}</td>
-                  <td>
-                    {ticket.createdOn
-                      ? moment(ticket.createdOn).fromNow()
-                      : "-"}
-                  </td>
-                  <td>{ticket.updatedBy ? ticket.updatedBy : "-"}</td>
-                  <td>
-                    {ticket.updatedOn
-                      ? moment(ticket.updatedOn).fromNow()
-                      : "-"}
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      <TicketsTable tickets={tickets} />
 
       {/* Inline tasks section. */}
       <div className="row align-items-center mb-2">
@@ -484,42 +379,7 @@ const Details = () => {
         onChange={(e) => handleSearch(e, "tasks")}
       />
 
-      <table className="table table-bordered table-hover my-4">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Created by</th>
-            <th>Created on</th>
-            <th>Updated by</th>
-            <th>Updated on</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tasks.length > 0 &&
-            tasks.map((task) => {
-              return (
-                <tr key={task.id}>
-                  <td>
-                    <Link to={`/tasks/${task.id}`}>{task.id}</Link>
-                  </td>
-                  <td>
-                    <Link to={`/tasks/${task.id}`}>{task.title}</Link>
-                  </td>
-                  {/* TODO: Display full name of the user. */}
-                  <td>{task.createdBy ? task.createdBy : "-"}</td>
-                  <td>
-                    {task.createdOn ? moment(task.createdOn).fromNow() : "-"}
-                  </td>
-                  <td>{task.updatedBy ? task.updatedBy : "-"}</td>
-                  <td>
-                    {task.updatedOn ? moment(task.updatedOn).fromNow() : "-"}
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      <TasksTable tasks={tasks} />
     </Layout>
   );
 };
