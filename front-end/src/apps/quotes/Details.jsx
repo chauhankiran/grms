@@ -1,6 +1,5 @@
-import moment from "moment";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import constants from "../../constants";
 import Layout from "./Layout";
 
