@@ -1,4 +1,4 @@
-const Form = ({ deal, handleCancel, handleChange, handleSubmit }) => {
+const Form = ({ mode, deal, handleCancel, handleChange, handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -102,7 +102,7 @@ const Form = ({ deal, handleCancel, handleChange, handleSubmit }) => {
 
       <div className="mb-3">
         <button type="submit" className="btn btn-primary me-2">
-          Create deal
+          {mode === "create" ? "Create" : "Update"} deal
         </button>
         <button onClick={handleCancel} className="btn btn-light me-2">
           Cancel

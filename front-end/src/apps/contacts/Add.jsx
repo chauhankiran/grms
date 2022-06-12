@@ -46,6 +46,7 @@ const Add = () => {
       <h1>Add contact</h1>
 
       <Form
+        mode="create"
         contact={contact}
         handleCancel={handleCancel}
         handleChange={handleChange}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ListSearch from "../../components/ListSearch";
 import constants from "../../constants";
 import Layout from "./Layout";

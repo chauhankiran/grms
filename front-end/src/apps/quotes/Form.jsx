@@ -1,4 +1,4 @@
-const Form = ({ quote, handleCancel, handleChange, handleSubmit }) => {
+const Form = ({ mode, quote, handleCancel, handleChange, handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -50,7 +50,7 @@ const Form = ({ quote, handleCancel, handleChange, handleSubmit }) => {
 
       <div className="mb-3">
         <button type="submit" className="btn btn-primary me-2">
-          Create quote
+          {mode === "create" ? "Create" : "Update"} quote
         </button>
         <button onClick={handleCancel} className="btn btn-light me-2">
           Cancel

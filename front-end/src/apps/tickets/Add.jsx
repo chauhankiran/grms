@@ -54,6 +54,7 @@ const Add = () => {
       <h1>Add ticket</h1>
 
       <Form
+        mode="create"
         ticket={ticket}
         handleCancel={handleCancel}
         handleChange={handleChange}

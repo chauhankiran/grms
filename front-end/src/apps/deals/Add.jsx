@@ -50,6 +50,7 @@ const Add = () => {
       <h1>Add deal</h1>
 
       <Form
+        mode="create"
         deal={deal}
         handleCancel={handleCancel}
         handleChange={handleChange}

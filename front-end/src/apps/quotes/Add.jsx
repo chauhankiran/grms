@@ -52,6 +52,7 @@ const Add = () => {
       <h1>Add quote</h1>
 
       <Form
+        mode="create"
         quote={quote}
         handleCancel={handleCancel}
         handleChange={handleChange}

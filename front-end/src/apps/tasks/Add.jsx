@@ -56,6 +56,7 @@ const Add = () => {
       <h1>Add task</h1>
 
       <Form
+        mode="create"
         task={task}
         handleCancel={handleCancel}
         handleChange={handleChange}

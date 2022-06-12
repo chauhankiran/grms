@@ -1,4 +1,4 @@
-const Form = ({ ticket, handleCancel, handleChange, handleSubmit }) => {
+const Form = ({ mode, ticket, handleCancel, handleChange, handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -119,7 +119,7 @@ const Form = ({ ticket, handleCancel, handleChange, handleSubmit }) => {
 
       <div className="mb-3">
         <button type="submit" className="btn btn-primary me-2">
-          Create ticket
+          {mode === "create" ? "Create" : "Update"} ticket
         </button>
         <button onClick={handleCancel} className="btn btn-light me-2">
           Cancel

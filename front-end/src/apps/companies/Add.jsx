@@ -85,6 +85,7 @@ const Add = () => {
       <h1>Add company</h1>
 
       <Form
+        mode="create"
         company={company}
         picklist={picklist}
         handleCancel={handleCancel}

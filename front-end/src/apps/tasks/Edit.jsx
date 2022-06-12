@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import constants from "../../constants";
+import Form from "./Form";
 import Layout from "./Layout";
 
 const Edit = () => {
@@ -58,50 +59,12 @@ const Edit = () => {
     <Layout>
       <h1>Edit task</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-md-12">
-            <div className="mb-3">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                placeholder="e.g. 42 Monitors"
-                className="form-control"
-                value={task.title || ""}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-md-6">
-            <div className="mb-3">
-              <label htmlFor="time">Time</label>
-              <input
-                type="text"
-                name="time"
-                id="time"
-                placeholder="e.g. 12/01/2022"
-                className="form-control"
-                value={task.time || ""}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-3">
-          <button type="submit" className="btn btn-primary me-2">
-            Update task
-          </button>
-          <button onClick={handleCancel} className="btn btn-light me-2">
-            Cancel
-          </button>
-        </div>
-      </form>
+      <Form
+        mode="update"
+        handleCancel={handleCancel}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
     </Layout>
   );
 };

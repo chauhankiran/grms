@@ -1,4 +1,5 @@
 const Form = ({
+  mode,
   company,
   picklist,
   handleCancel,
@@ -210,7 +211,7 @@ const Form = ({
 
       <div className="mb-3">
         <button type="submit" className="btn btn-primary me-2">
-          Create company
+          {mode === "create" ? "Create" : "Update"} company
         </button>
         <button onClick={handleCancel} className="btn btn-light me-2">
           Cancel
