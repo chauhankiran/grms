@@ -137,3 +137,29 @@ CREATE TABLE tasks (
   archivedOn TEXT,
   archivedBy INTEGER
 );
+
+--- `ref_states` table.
+CREATE TABLE ref_states (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  createdBy INTEGER,
+  createdOn TEXT,
+  updatedBy INTEGER,
+  updatedOn TEXT,
+  active INTEGER,
+  archivedOn TEXT,
+  archivedBy INTEGER
+);
+
+--- `ref_countries` table.
+CREATE TABLE ref_countries (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  createdBy INTEGER,
+  createdOn TEXT,
+  updatedBy INTEGER,
+  updatedOn TEXT,
+  active INTEGER,
+  archivedOn TEXT,
+  archivedBy INTEGER
+);

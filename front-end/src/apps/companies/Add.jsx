@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import constants from "../../constants";
 import Layout from "./Layout";
@@ -6,6 +6,52 @@ import Layout from "./Layout";
 const Add = () => {
   const navigate = useNavigate();
   const [company, setCompany] = useState({});
+  const [picklist, setPicklist] = useState({});
+
+  // TODO: Re-arrange this function into common one or place it inside other file.
+  const getStates = () => {
+    fetch(`${constants.API_ENDPOINT}/fields/picklist/state`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPicklist((prevPicklist) => {
+          return { ...prevPicklist, states: data.data };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // TODO: Re-arrange this function into common one or place it inside other file.
+  const getCountries = () => {
+    fetch(`${constants.API_ENDPOINT}/fields/picklist/country`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPicklist((prevPicklist) => {
+          return { ...prevPicklist, countries: data.data };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // TODO: Update the dep array to check if states field exist,
+  // if yes, then go ahead and fetch the state picklist.
+  useEffect(() => {
+    getStates();
+    getCountries();
+  }, []);
 
   const handleCancel = () => {
     navigate("/companies");
@@ -186,8 +232,14 @@ const Add = () => {
                 onChange={handleChange}
               >
                 <option value="0">None</option>
-                <option value="1">Taxas</option>
-                <option value="2">Salsa</option>
+                {picklist.states &&
+                  picklist.states.map((state) => {
+                    return (
+                      <option key={state.id} value={state.id}>
+                        {state.name}
+                      </option>
+                    );
+                  })}
               </select>
             </div>
           </div>
@@ -218,8 +270,14 @@ const Add = () => {
                 onChange={handleChange}
               >
                 <option value="0">None</option>
-                <option value="1">India</option>
-                <option value="2">Japan</option>
+                {picklist.countries &&
+                  picklist.countries.map((country) => {
+                    return (
+                      <option key={country.id} value={country.id}>
+                        {country.name}
+                      </option>
+                    );
+                  })}
               </select>
             </div>
           </div>

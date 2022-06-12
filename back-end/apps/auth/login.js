@@ -22,7 +22,7 @@ const login = async (req, res, next) => {
         const token = jsonwebtoken.sign(
           { id: user.id },
           process.env.JWT_SECRET,
-          { expiresIn: "1d" }
+          { expiresIn: "10d" }
         );
         return res.status(200).json({ data: token });
       } else {
