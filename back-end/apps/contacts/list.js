@@ -22,7 +22,8 @@ const list = async (req, res, next) => {
       skip = (page - 1) * size;
     }
 
-    const contact = await connection("contacts")
+    // Sub query.
+    const subQuery = connection("contacts")
       .where("active", 1)
       .modify((query) => {
         if (search) {
@@ -32,7 +33,12 @@ const list = async (req, res, next) => {
         if (companyId) {
           query.whereLike("companyId", `${companyId}%`);
         }
-      })
+      });
+
+    const t = await subQuery.clone().count("id as count");
+    const total = t[0].count;
+    const contacts = await subQuery
+      .clone()
       .select(
         "id",
         "companyId",
@@ -60,9 +66,10 @@ const list = async (req, res, next) => {
         "archivedBy"
       )
       .offset(skip)
+      .limit(size)
       .orderBy(sortBy, sortDir);
 
-    return res.status(200).json({ data: contact });
+    return res.status(200).json({ data: contacts, count: total || 0 });
   } catch (error) {
     next(error);
   }

@@ -2,24 +2,32 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListSearch from "../../components/ListSearch";
 import getList from "../../services/getList";
+
 import Layout from "./Layout";
 import Table from "./Table";
+import Pagination from "./Pagination";
 
 const List = () => {
   const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
+  // TODO: Do we need diff. state for this?
+  const [count, setCount] = useState(0);
   const [listingOptions, setListingOptions] = useState({
-    size: 10,
+    size: 2,
     page: 1,
     sortDir: "desc",
     sortBy: "id",
     search: "",
+    count: 0,
   });
 
   // TODO: Re-arrange this function into common one or place it inside other file.
   const getCompanies = (payload) => {
     getList("companies", payload)
-      .then((data) => setCompanies(data.data))
+      .then((data) => {
+        setCompanies(data.data);
+        setCount(data.count);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -33,6 +41,14 @@ const List = () => {
 
   const handleSearch = (e) => {
     setListingOptions({ ...listingOptions, search: e.target.value });
+  };
+
+  // Supportive functions for paginations.
+  const handleNext = () => {
+    setListingOptions({ ...listingOptions, page: listingOptions.page + 1 });
+  };
+  const handlePrev = () => {
+    setListingOptions({ ...listingOptions, page: listingOptions.page - 1 });
   };
 
   return (
@@ -52,7 +68,15 @@ const List = () => {
 
       {/* A companies table. */}
       <Table companies={companies} />
-      {/* TODO: Add pagination support. */}
+
+      {/* Pagination. */}
+      <Pagination
+        page={listingOptions.page}
+        size={listingOptions.size}
+        count={count}
+        handlePrev={handlePrev}
+        handleNext={handleNext}
+      />
     </Layout>
   );
 };

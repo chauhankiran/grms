@@ -23,7 +23,8 @@ const list = async (req, res, next) => {
       skip = (page - 1) * size;
     }
 
-    const quotes = await connection("quotes")
+    // Sub query.
+    const subQuery = connection("quotes")
       .where("active", 1)
       .modify((query) => {
         if (search) {
@@ -38,7 +39,12 @@ const list = async (req, res, next) => {
         if (dealId) {
           query.whereLike("dealId", `${dealId}%`);
         }
-      })
+      });
+
+    const t = await subQuery.clone().count("id as count");
+    const total = t[0].count;
+    const quotes = await subQuery
+      .clone()
       .select(
         "id",
         "companyId",
@@ -53,9 +59,10 @@ const list = async (req, res, next) => {
         "updatedOn"
       )
       .offset(skip)
+      .limit(size)
       .orderBy(sortBy, sortDir);
 
-    return res.status(200).json({ data: quotes });
+    return res.status(200).json({ data: quotes, count: total || 0 });
   } catch (error) {
     next(error);
   }

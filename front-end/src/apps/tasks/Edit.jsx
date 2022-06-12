@@ -61,6 +61,7 @@ const Edit = () => {
 
       <Form
         mode="update"
+        task={task}
         handleCancel={handleCancel}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
